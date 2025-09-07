@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids' Precious Words 💝</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Comfortaa:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon-container">
+                    <img src="images/icon.jpg" alt="Kids' Memories Logo" class="brand-icon">
+                    <div class="icon-sparkles">
+                        <span class="sparkle sparkle-1">✨</span>
+                        <span class="sparkle sparkle-2">⭐</span>
+                        <span class="sparkle sparkle-3">💫</span>
+                    </div>
+                </div>
+                <div class="brand-text-container">
+                    <span class="brand-text">Kids' Memories</span>
+                    <span class="brand-tagline">💕 Precious Moments 💕</span>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button class="export-btn" onclick="app.exportMemories()">
+                    <span class="btn-icon">📁</span>
+                    Export
+                </button>
+                <input type="file" id="importInput" class="import-input" accept=".json" onchange="handleImport(this)">
+                <button class="import-btn" onclick="document.getElementById('importInput').click()">
+                    <span class="btn-icon">📂</span>
+                    Import
+                </button>
+                <button class="add-btn" id="addBtn">
+                    <span class="btn-icon">+</span>
+                    Add Memory
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-characters">
+                <div class="cute-character character-left">
+                    <div class="character-face">
+                        <div class="character-head">
+                            <div class="character-hair"></div>
+                            <div class="character-eyes">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                            </div>
+                            <div class="character-blush left-blush"></div>
+                            <div class="character-blush right-blush"></div>
+                            <div class="character-mouth"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Capture precious moments and read them in exciting way</h1>
+                    <p class="hero-subtitle">Save your little one's cutest words, funniest sayings, and most heartwarming moments in beautiful memory cards that you can cherish forever.</p>
+                    <button class="hero-cta" id="heroAddBtn">
+                        <span class="cta-icon">✨</span>
+                        Create First Memory
+                    </button>
+                </div>
+                <div class="cute-character character-right">
+                    <div class="character-face">
+                        <div class="character-head">
+                            <div class="character-hair"></div>
+                            <div class="character-eyes">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                            </div>
+                            <div class="character-blush left-blush"></div>
+                            <div class="character-blush right-blush"></div>
+                            <div class="character-mouth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Memories Section -->
+        <section class="memories-section">
+            <div class="section-header">
+                <h2 class="section-title">Your Precious Memories</h2>
+                <p class="section-subtitle">All your child's wonderful words in one beautiful place</p>
+            </div>
+            <div class="memories-grid" id="memoriesContainer">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-character">
+                        <div class="empty-char-face">
+                            <div class="empty-char-head">
+                                <div class="empty-char-hair"></div>
+                                <div class="empty-char-eyes">
+                                    <div class="empty-eye left-eye"></div>
+                                    <div class="empty-eye right-eye"></div>
+                                </div>
+                                <div class="empty-char-blush left-blush"></div>
+                                <div class="empty-char-blush right-blush"></div>
+                                <div class="empty-char-mouth"></div>
+                            </div>
+                            <div class="empty-char-speech-bubble">
+                                <div class="speech-bubble-text">💭</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>No memories yet!</h3>
+                    <p>Start capturing your little one's precious words by adding your first memory card.</p>
+                    <div class="empty-decorations">
+                        <span class="empty-deco">✨</span>
+                        <span class="empty-deco">🌈</span>
+                        <span class="empty-deco">✨</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination-controls" id="paginationControls" style="display: none;">
+                <button class="nav-btn prev-btn" id="prevBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="page-info">
+                    <span id="pageInfo">1 / 4</span>
+                </div>
+                <button class="nav-btn next-btn" id="nextBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Add/Edit Modal -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Add New Memory</h2>
+                    <button class="close-btn" id="closeBtn">&times;</button>
+                </div>
+                <form class="modal-form" id="memoryForm">
+                    <div class="form-group">
+                        <label for="childName">Child's Name (optional)</label>
+                        <input type="text" id="childName" placeholder="e.g., Emma">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="childAge">Age (optional)</label>
+                        <input type="text" id="childAge" placeholder="e.g., 3 years old">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="memoryText">What did they say? *</label>
+                        <textarea id="memoryText" placeholder="Write down those precious words..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="memoryDate">Date</label>
+                        <input type="date" id="memoryDate" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="save-btn" id="saveBtn">Save Memory</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div class="modal-overlay" id="deleteModalOverlay">
+            <div class="modal delete-modal">
+                <div class="modal-header">
+                    <h2>Delete Memory?</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this precious memory? This action cannot be undone.</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelDeleteBtn">Cancel</button>
+                    <button type="button" class="delete-btn" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
