@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wunder — Toy Recommendations for Little Ones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">
+        <span class="logo-star">✦</span> Wunder
+      </a>
+      <button class="wishlist-btn" id="wishlist-btn" aria-label="Open wishlist">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        Wishlist
+        <span class="wishlist-badge" id="wishlist-badge" aria-live="polite">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-deco deco-star1">✦</div>
+    <div class="hero-deco deco-star2">✶</div>
+    <div class="hero-deco deco-circle1"></div>
+    <div class="hero-deco deco-circle2"></div>
+    <div class="hero-deco deco-squiggle">〜</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Ages 0–5 · Developmental picks</p>
+      <h1 class="hero-headline">Find the toy<br /><em>made for them.</em></h1>
+      <p class="hero-sub">Tell us about your little one and Wunder finds toys that support exactly where they are developmentally — picked by AI, grounded in research.</p>
+    </div>
+  </section>
+
+  <!-- ── Profile Form ────────────────────────────────────────────────────── -->
+  <main class="main">
+    <div class="form-card" id="form-card">
+      <h2 class="form-title">About your child</h2>
+
+      <!-- Age -->
+      <div class="field-group">
+        <label class="field-label" for="age-slider">
+          Age
+          <span class="age-display" id="age-display">2 years old</span>
+        </label>
+        <div class="slider-track">
+          <input type="range" id="age-slider" min="0" max="5" value="2" step="1" class="slider" aria-label="Child's age" />
+          <div class="slider-labels">
+            <span>Newborn</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gender -->
+      <div class="field-group">
+        <label class="field-label">Gender preference</label>
+        <div class="toggle-group" role="radiogroup" aria-label="Gender preference">
+          <button class="toggle-btn active" data-gender="all" role="radio" aria-checked="true">All</button>
+          <button class="toggle-btn" data-gender="girl" role="radio" aria-checked="false">Girl</button>
+          <button class="toggle-btn" data-gender="boy" role="radio" aria-checked="false">Boy</button>
+        </div>
+      </div>
+
+      <!-- Interests -->
+      <div class="field-group">
+        <label class="field-label">Interests <span class="field-hint">(pick any)</span></label>
+        <div class="chips-group" role="group" aria-label="Toy categories">
+          <button class="chip" data-category="Educational" aria-pressed="false">🧠 Educational</button>
+          <button class="chip" data-category="Creative" aria-pressed="false">🎨 Creative</button>
+          <button class="chip" data-category="Outdoor" aria-pressed="false">🌳 Outdoor</button>
+          <button class="chip" data-category="Building" aria-pressed="false">🧱 Building</button>
+          <button class="chip" data-category="Pretend Play" aria-pressed="false">🎭 Pretend Play</button>
+          <button class="chip" data-category="Tech" aria-pressed="false">🤖 Tech</button>
+          <button class="chip" data-category="Games" aria-pressed="false">🎲 Games</button>
+        </div>
+      </div>
+
+      <!-- Budget -->
+      <div class="field-group">
+        <label class="field-label">Budget</label>
+        <div class="budget-group" role="radiogroup" aria-label="Budget range">
+          <button class="budget-btn" data-min="0" data-max="25" role="radio" aria-checked="false">Under $25</button>
+          <button class="budget-btn active" data-min="0" data-max="9999" role="radio" aria-checked="true">Any</button>
+          <button class="budget-btn" data-min="25" data-max="50" role="radio" aria-checked="false">$25–$50</button>
+          <button class="budget-btn" data-min="50" data-max="100" role="radio" aria-checked="false">$50–$100</button>
+          <button class="budget-btn" data-min="100" data-max="9999" role="radio" aria-checked="false">$100+</button>
+        </div>
+      </div>
+
+      <!-- Free text -->
+      <div class="field-group">
+        <label class="field-label" for="description">
+          Tell us about your child
+          <span class="field-hint">(optional)</span>
+        </label>
+        <textarea
+          id="description"
+          class="textarea"
+          rows="3"
+          maxlength="500"
+          placeholder="e.g. She loves animals, is very active, and has been really into pretend cooking lately…"
+          aria-label="Describe your child"
+        ></textarea>
+        <span class="char-count" id="char-count">0 / 500</span>
+      </div>
+
+      <button class="submit-btn" id="submit-btn">
+        <span class="submit-text">Find Perfect Toys</span>
+        <span class="submit-icon">→</span>
+      </button>
+    </div>
+
+    <!-- ── Error Banner ───────────────────────────────────────────────── -->
+    <div class="error-banner" id="error-banner" role="alert" aria-live="assertive" hidden>
+      <span id="error-message"></span>
+      <button class="error-close" id="error-close" aria-label="Dismiss error">✕</button>
+    </div>
+
+    <!-- ── Results Section ────────────────────────────────────────────── -->
+    <section class="results-section" id="results-section" hidden aria-live="polite">
+
+      <!-- Loading -->
+      <div class="loading-state" id="loading-state" hidden>
+        <div class="loading-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <p class="loading-text">Wunder is thinking…</p>
+      </div>
+
+      <!-- Results content -->
+      <div id="results-content" hidden>
+        <p class="ai-intro" id="ai-intro"></p>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label class="filter-label" for="filter-category">Category</label>
+            <select class="filter-select" id="filter-category" aria-label="Filter by category">
+              <option value="all">All Categories</option>
+              <option value="Educational">Educational</option>
+              <option value="Creative">Creative</option>
+              <option value="Outdoor">Outdoor</option>
+              <option value="Building">Building</option>
+              <option value="Pretend Play">Pretend Play</option>
+              <option value="Tech">Tech</option>
+              <option value="Games">Games</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="filter-sort">Sort by</label>
+            <select class="filter-select" id="filter-sort" aria-label="Sort results">
+              <option value="score">Best Match</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Toy Grid -->
+        <div class="toy-grid" id="toy-grid" role="list"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Wishlist Drawer ─────────────────────────────────────────────────── -->
+  <div class="drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+  <aside class="wishlist-drawer" id="wishlist-drawer" aria-label="Wishlist" aria-hidden="true">
+    <div class="drawer-header">
+      <h2 class="drawer-title">Your Wishlist</h2>
+      <button class="drawer-close" id="drawer-close" aria-label="Close wishlist">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+      <p class="drawer-empty" id="drawer-empty">No toys saved yet. Heart a toy to add it here!</p>
+      <div class="drawer-list" id="drawer-list"></div>
+    </div>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
