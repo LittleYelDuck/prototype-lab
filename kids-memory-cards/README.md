@@ -160,9 +160,6 @@ Want to make the app even more adorable? Contributions are welcome!
 - Additional export formats
 - Enhanced mobile features
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 💝 Acknowledgments
 
